@@ -32,6 +32,22 @@ public class GameActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button next = findViewById(R.id.next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GameActivity.this, GameActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button clear = findViewById(R.id.clear);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculation.setText("");
+                function = "";
+            }
+        });
         final int num1 = (int)(Math.random() * 13) + 1;
         final int num2 = (int)(Math.random() * 13) + 1;
         final int num3 = (int)(Math.random() * 13) + 1;
@@ -233,6 +249,9 @@ public class GameActivity extends AppCompatActivity {
         return true;
     }
     private boolean check() {
+        if (function == null || function.length() == 0) {
+            return false;
+        }
         Expression expression = new Expression(function);
         BigDecimal outPut = expression.eval();
         BigDecimal constant = new BigDecimal(24);
