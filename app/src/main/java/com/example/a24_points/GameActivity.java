@@ -5,9 +5,12 @@ import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.TextView;
+import java.util.Stack;
 
 public class GameActivity extends AppCompatActivity {
     private String function = "";
+    private Stack<Integer> numberStack = null;
+    private Stack<Character> symbolStack = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,12 +121,105 @@ public class GameActivity extends AppCompatActivity {
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cal();
+                int i = cal(function);
+                output.setText(String.valueOf(i));
             }
         });
     }
 
-    public int cal() {
-        return 0;
+    public int cal(String numStr) {
+        numberStack = new Stack<Integer>();
+        symbolStack = new Stack<Character>();
+        StringBuffer temp = new StringBuffer();
+        if (numStr.length() > 1 && !"=".equals(numStr.charAt(numStr.length() - 1) + "")) {
+            numStr += "=";
+        }
+        for (int i = 0; i < numStr.length(); i++) {
+            char ch = numStr.charAt(i);
+            if (isNumber(ch)) {
+                temp.append(ch);
+                } else {
+                    String tempStr = temp.toString();
+                    if (!tempStr.isEmpty()) {
+                    int num = Integer.parseInt(tempStr);
+                    numberStack.push(num);
+                    temp = new StringBuffer();
+                    }
+                    while (!comparePri(ch) && !symbolStack.empty()) {
+                        int b = numberStack.pop();
+                        int a = numberStack.pop();
+                        switch ((char) symbolStack.pop()) {
+                            case '+':
+                                numberStack.push(a + b);
+                                break;
+                            case '-':
+                                numberStack.push(a - b);
+                                break;
+                            case '*':
+                                numberStack.push(a * b);
+                                break;
+                            case '/':
+                                numberStack.push(a / b);
+                                break;
+                            default:
+                                break;
+                            }
+                    }
+                    if (ch != '=') {
+                        symbolStack.push(new Character(ch));
+                    }
+                    if (ch == ')') {
+                        symbolStack.pop();
+                        symbolStack.pop();
+                    }
+                }
+            }
+        return numberStack.pop();
+    }
+
+    private boolean isNumber(char num) {
+        if (num >= '0' && num <= '9') {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean comparePri(char symbol) {
+        if (symbolStack.empty()) {
+            return true;
+        }
+        char top = (char) symbolStack.peek();
+        if (top == '(') {
+            return true;
+        }
+        switch (symbol) {
+            case '(':
+                return true;
+            case '*': {
+                if (top == '+' || top == '-') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            case '/': {
+                if (top == '+' || top == '-') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            case '+':
+                return false;
+            case '-':
+                return false;
+            case ')':
+                return false;
+            case '=':
+                return false;
+            default:
+                break;
+        }
+        return true;
     }
 }
