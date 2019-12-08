@@ -30,6 +30,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(GameActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         Button next = findViewById(R.id.next);
@@ -38,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(GameActivity.this, GameActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         Button clear = findViewById(R.id.clear);
