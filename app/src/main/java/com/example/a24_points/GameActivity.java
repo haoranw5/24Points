@@ -5,6 +5,10 @@ import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.TextView;
+
+import com.udojava.evalex.Expression;
+
+import java.math.BigDecimal;
 import java.util.Stack;
 
 public class GameActivity extends AppCompatActivity {
@@ -117,12 +121,18 @@ public class GameActivity extends AppCompatActivity {
             }
         });
         final TextView output = findViewById(R.id.output);
+        final TextView correctOrNot = findViewById(R.id.correctOrNot);
         Button calculate = findViewById(R.id.calculate);
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int i = cal(function);
                 output.setText(String.valueOf(i));
+                if (check() == true) {
+                    correctOrNot.setText("Correct!");
+                } else {
+                    correctOrNot.setText("Try Again");
+                }
             }
         });
     }
@@ -221,5 +231,14 @@ public class GameActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+    private boolean check() {
+        Expression expression = new Expression(function);
+        BigDecimal outPut = expression.eval();
+        BigDecimal constant = new BigDecimal(24);
+        if (outPut.equals(constant)) {
+            return true;
+        }
+        return false;
     }
 }
