@@ -8,6 +8,28 @@
     tools:context=".GameActivity">
 
     <Button
+        android:id="@+id/leftHypo"
+        android:layout_width="40dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="180dp"
+        android:text="("
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.838"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/rightHypo"
+        android:layout_width="40dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="180dp"
+        android:text=")"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
         android:id="@+id/multiply"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -41,15 +63,14 @@
         android:id="@+id/plus"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="30dp"
         android:text="+"
-        app:layout_constraintBottom_toTopOf="@+id/calculation"
+        app:layout_constraintBottom_toTopOf="@+id/leftHypo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.939"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imageButton1"
+    <Button
+        android:id="@+id/one"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="40dp"
@@ -57,25 +78,29 @@
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:layout_marginBottom="30dp"
+        android:background="@color/colorPrimary"
         android:contentDescription="@string/app_name"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/calculation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2" />
+        app:layout_constraintStart_toEndOf="@+id/two" />
 
-    <ImageButton
-        android:id="@+id/imageButton2"
+    <Button
+        android:id="@+id/two"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginBottom="30dp"
+        android:background="@color/colorPrimary"
         android:contentDescription="@string/app_name"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/calculation"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imageButton3"
+    <Button
+        android:id="@+id/three"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="40dp"
@@ -83,38 +108,43 @@
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:layout_marginBottom="40dp"
+        android:background="@color/colorPrimary"
         android:contentDescription="@string/app_name"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton1"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/one"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton4" />
+        app:layout_constraintStart_toEndOf="@+id/four" />
 
-    <ImageButton
-        android:id="@+id/imageButton4"
+    <Button
+        android:id="@+id/four"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginBottom="40dp"
+        android:background="@color/colorPrimary"
         android:contentDescription="@string/app_name"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/two"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/calculation"
         android:layout_width="296dp"
         android:layout_height="53dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="20dp"
         android:text="calculation"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/calculate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.13"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/calculate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="20dp"
         android:text="calculate"
         app:layout_constraintBottom_toTopOf="@+id/output"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,9 +167,26 @@
         android:id="@+id/output"
         android:layout_width="206dp"
         android:layout_height="65dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="32dp"
+        android:shadowColor="#009B5A5A"
         android:text="output"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.351"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="100dp"
+        android:text="Clear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.939"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Clear" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
