@@ -154,6 +154,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public int cal(String numStr) {
+        if (function == null || function.length() == 0) {
+            return 0;
+        }
         numberStack = new Stack<Integer>();
         symbolStack = new Stack<Character>();
         StringBuffer temp = new StringBuffer();
