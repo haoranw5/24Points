@@ -21,6 +21,10 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         run();
     }
+    private int num1 = 0;
+    private int num2 = 0;
+    private int num3 = 0;
+    private int num4 = 0;
     private Boolean numOne = true;
     private Boolean numTwo = true;
     private Boolean numThree = true;
@@ -57,10 +61,7 @@ public class GameActivity extends AppCompatActivity {
                 numFour = true;
             }
         });
-        final int num1 = (int)(Math.random() * 13) + 1;
-        final int num2 = (int)(Math.random() * 13) + 1;
-        final int num3 = (int)(Math.random() * 13) + 1;
-        final int num4 = (int)(Math.random() * 13) + 1;
+        setNumber();
         Button one = findViewById(R.id.one);
         one.setText(String.valueOf(num1));
         Button two = findViewById(R.id.two);
@@ -199,4 +200,22 @@ public class GameActivity extends AppCompatActivity {
         }
         return false;
     }
+    private void setNumber() {
+        int a = (int)(Math.random() * 13) + 1;
+        int b = (int)(Math.random() * 13) + 1;
+        int c = (int)(Math.random() * 13) + 1;
+        int d = (int)(Math.random() * 13) + 1;
+        checkNumber.getnumber(a, b, c, d);
+        checkNumber.f(4);
+        if (checkNumber.count != 0) {
+            num1 = a;
+            num2 = b;
+            num3 = c;
+            num4 = d;
+        } else {
+            setNumber();
+        }
+        System.out.println(checkNumber.count);
+    }
+
 }
