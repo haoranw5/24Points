@@ -130,14 +130,14 @@
 
     <TextView
         android:id="@+id/calculation"
-        android:layout_width="296dp"
-        android:layout_height="53dp"
+        android:layout_width="218dp"
+        android:layout_height="51dp"
         android:layout_marginBottom="20dp"
         android:text="calculation"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/calculate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -159,7 +159,7 @@
         android:layout_marginRight="200dp"
         android:text="back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintHorizontal_bias="0.406"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -167,8 +167,8 @@
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginLeft="76dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="87dp"
         android:text="Next"
@@ -179,8 +179,12 @@
 
     <TextView
         android:id="@+id/output"
-        android:layout_width="206dp"
-        android:layout_height="65dp"
+        android:layout_width="146dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginRight="200dp"
         android:layout_marginBottom="32dp"
         android:shadowColor="#009B5A5A"
         android:text="output"
@@ -188,7 +192,7 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.351"
+        app:layout_constraintHorizontal_bias="0.693"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -207,16 +211,16 @@
         android:id="@+id/correctOrNot"
         android:layout_width="158dp"
         android:layout_height="52dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginRight="31dp"
-        android:layout_marginBottom="63dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="107dp"
+        android:layout_marginRight="107dp"
+        android:layout_marginBottom="26dp"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/three"
-        app:layout_constraintEnd_toStartOf="@+id/multiply"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.863"
+        app:layout_constraintStart_toEndOf="@+id/output"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,10 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         run();
     }
-
+    private Boolean numOne = true;
+    private Boolean numTwo = true;
+    private Boolean numThree = true;
+    private Boolean numFour = true;
     public void run() {
         Button back = findViewById(R.id.back);
         final TextView calculation = findViewById(R.id.calculation);
@@ -48,6 +51,10 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 calculation.setText("");
                 function = "";
+                numOne = true;
+                numTwo = true;
+                numThree = true;
+                numFour = true;
             }
         });
         final int num1 = (int)(Math.random() * 13) + 1;
@@ -65,29 +72,41 @@ public class GameActivity extends AppCompatActivity {
         one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                function = function + num1;
-                calculation.setText(function);
+                if (numOne == true) {
+                    function = function + num1;
+                    calculation.setText(function);
+                    numOne = false;
+                }
             }
         });
         two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                function = function + num2;
-                calculation.setText(function);
+                if (numTwo == true) {
+                    function = function + num2;
+                    calculation.setText(function);
+                    numTwo = false;
+                }
             }
         });
         three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                function = function + num3;
-                calculation.setText(function);
+                if (numThree == true) {
+                    function = function + num3;
+                    calculation.setText(function);
+                    numThree = false;
+                }
             }
         });
         four.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                function = function + num4;
-                calculation.setText(function);
+                if (numFour == true) {
+                    function = function + num4;
+                    calculation.setText(function);
+                    numFour = false;
+                }
             }
         });
         Button leftHypo = findViewById(R.id.leftHypo);
@@ -144,114 +163,26 @@ public class GameActivity extends AppCompatActivity {
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int i = cal(function);
-                output.setText(String.valueOf(i));
-                if (check() == true) {
-                    correctOrNot.setText("Correct!");
-                } else {
-                    correctOrNot.setText("Try Again");
+                if (numOne == false && numTwo == false && numThree == false && numFour == false) {
+                    int i = cal();
+                    output.setText(String.valueOf(i));
+                    if (check() == true) {
+                        correctOrNot.setText("Correct!");
+                    } else {
+                        correctOrNot.setText("Try Again");
+                    }
                 }
             }
         });
     }
 
-    public int cal(String numStr) {
-        if (function == null || function.length() == 0) {
+    public int cal() {
+        Expression expression = new Expression(function);
+        BigDecimal outPut = expression.eval();
+        if (outPut == null) {
             return 0;
         }
-        numberStack = new Stack<Integer>();
-        symbolStack = new Stack<Character>();
-        StringBuffer temp = new StringBuffer();
-        if (numStr.length() > 1 && !"=".equals(numStr.charAt(numStr.length() - 1) + "")) {
-            numStr += "=";
-        }
-        for (int i = 0; i < numStr.length(); i++) {
-            char ch = numStr.charAt(i);
-            if (isNumber(ch)) {
-                temp.append(ch);
-                } else {
-                    String tempStr = temp.toString();
-                    if (!tempStr.isEmpty()) {
-                    int num = Integer.parseInt(tempStr);
-                    numberStack.push(num);
-                    temp = new StringBuffer();
-                    }
-                    while (!comparePri(ch) && !symbolStack.empty()) {
-                        int b = numberStack.pop();
-                        int a = numberStack.pop();
-                        switch ((char) symbolStack.pop()) {
-                            case '+':
-                                numberStack.push(a + b);
-                                break;
-                            case '-':
-                                numberStack.push(a - b);
-                                break;
-                            case '*':
-                                numberStack.push(a * b);
-                                break;
-                            case '/':
-                                numberStack.push(a / b);
-                                break;
-                            default:
-                                break;
-                            }
-                    }
-                    if (ch != '=') {
-                        symbolStack.push(new Character(ch));
-                    }
-                    if (ch == ')') {
-                        symbolStack.pop();
-                        symbolStack.pop();
-                    }
-                }
-            }
-        return numberStack.pop();
-    }
-
-    private boolean isNumber(char num) {
-        if (num >= '0' && num <= '9') {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean comparePri(char symbol) {
-        if (symbolStack.empty()) {
-            return true;
-        }
-        char top = (char) symbolStack.peek();
-        if (top == '(') {
-            return true;
-        }
-        switch (symbol) {
-            case '(':
-                return true;
-            case '*': {
-                if (top == '+' || top == '-') {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-            case '/': {
-                if (top == '+' || top == '-') {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-            case '+':
-                return false;
-            case '-':
-                return false;
-            case ')':
-                return false;
-            case '=':
-                return false;
-            default:
-                break;
-        }
-        return true;
+        return outPut.intValue();
     }
     private boolean check() {
         if (function == null || function.length() == 0) {
@@ -259,6 +190,9 @@ public class GameActivity extends AppCompatActivity {
         }
         Expression expression = new Expression(function);
         BigDecimal outPut = expression.eval();
+        if (outPut == null) {
+            return false;
+        }
         BigDecimal constant = new BigDecimal(24);
         if (outPut.equals(constant)) {
             return true;
